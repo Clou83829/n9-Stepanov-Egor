@@ -1,0 +1,30 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="search_query" placeholder="Введите запрос (например: Python)" value="Python">
+        <button type="submit">Загрузить вакансии с HH.ru</button>
+    </form>
+    
+    <h2>Последние вакансии</h2>
+    
+    {% for vac in vacancies %}
+        <div class="vacancy">
+            <h3><a href="/vacancy/{{ vac.id }}/">{{ vac.title }}</a></h3>
+            <div class="company">{{ vac.company_name }} | {{ vac.city|default:"Город не указан" }}</div>
+            <div class="salary">
+                {% if vac.salary_from or vac.salary_to %}
+                    {% if vac.salary_from %}от {{ vac.salary_from }}{% endif %}
+                    {% if vac.salary_to %}до {{ vac.salary_to }}{% endif %} руб.
+                {% else %}
+                    Зарплата не указана
+                {% endif %}
+            </div>
+            <div>Категория: {{ vac.get_profession_category_display }}</div>
+            <a href="{{ vac.url }}" target="_blank">Открыть на HH.ru</a>
+        </div>
+    {% empty %}
+        <p>Вакансий пока нет. Загрузите их, используя форму выше.</p>
+    {% endfor %}
+{% endblock %}

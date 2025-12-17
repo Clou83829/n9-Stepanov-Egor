@@ -1,0 +1,31 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+    <a href="/">← Назад к списку</a>
+    
+    <div class="vacancy" style="margin-top: 20px;">
+        <h1>{{ vacancy.title }}</h1>
+        <h3 class="company">{{ vacancy.company_name }} | {{ vacancy.city|default:"Город не указан" }}</h3>
+        
+        <div class="salary" style="font-size: 1.2em; margin: 10px 0;">
+            {% if vacancy.salary_from or vacancy.salary_to %}
+                {% if vacancy.salary_from %}от {{ vacancy.salary_from }}{% endif %}
+                {% if vacancy.salary_to %}до {{ vacancy.salary_to }}{% endif %} руб.
+            {% else %}
+                Зарплата не указана
+            {% endif %}
+        </div>
+        
+        <div><strong>Категория:</strong> {{ vacancy.get_profession_category_display }}</div>
+        <div><strong>ID на HH.ru:</strong> {{ vacancy.hh_id }}</div>
+        
+        <a href="{{ vacancy.url }}" target="_blank" style="display: inline-block; margin: 10px 0; padding: 8px 15px; background: #28a745; color: white; text-decoration: none; border-radius: 3px;">
+            Открыть на HH.ru →
+        </a>
+        
+        <h3>Описание вакансии:</h3>
+        <div style="border: 1px solid #eee; padding: 15px; border-radius: 5px;">
+            {{ vacancy.description|safe|linebreaks }}
+        </div>
+    </div>
+{% endblock %}

@@ -20,8 +20,8 @@ python manage.py migrate
 python manage.py createsuperuser
 # username: admin
 # email: (можно пропустить)
-# password: admin123
-# confirm: admin123
+# password: admin
+# confirm: 12345
 
 # 5. Запустите сервер
 python manage.py runserver
@@ -79,8 +79,8 @@ python manage.py createsuperuser
 # Следуйте инструкциям:
 # Username: admin
 # Email address: (можно пропустить - нажать Enter)
-# Password: admin123
-# Password (again): admin123
+# Password: admin
+# Password (again): 12345
 Шаг 5: Запуск сервера
 bash
 # Запустите сервер разработки
@@ -112,6 +112,6 @@ python manage.py runserver
 
 Логин: admin
 
-Пароль: admin123
+Пароль: 12345
 
 Раздел "VACANCIES" - все загруженные вакансии
